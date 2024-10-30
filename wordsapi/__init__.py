@@ -4,6 +4,7 @@ __all__ = [
     'controllers',
     'exceptions',
     'http',
+    'logging',
     'models',
     'wordsapi_client',
 ]

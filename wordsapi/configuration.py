@@ -43,7 +43,8 @@ class Configuration(HttpClientConfiguration):
                  override_http_client_configuration=False, http_call_back=None,
                  timeout=60, max_retries=0, backoff_factor=2,
                  retry_statuses=None, retry_methods=None,
-                 environment=Environment.PRODUCTION, x_rapid_api_key=None,
+                 logging_configuration=None, environment=Environment.PRODUCTION,
+                 x_rapid_api_key=None,
                  custom_header_authentication_credentials=None):
         if retry_methods is None:
             retry_methods = ['GET', 'PUT']
@@ -54,7 +55,7 @@ class Configuration(HttpClientConfiguration):
         super().__init__(http_client_instance,
                          override_http_client_configuration, http_call_back,
                          timeout, max_retries, backoff_factor, retry_statuses,
-                         retry_methods)
+                         retry_methods, logging_configuration)
 
         # Current API environment
         self._environment = environment
@@ -68,7 +69,8 @@ class Configuration(HttpClientConfiguration):
     def clone_with(self, http_client_instance=None,
                    override_http_client_configuration=None, http_call_back=None,
                    timeout=None, max_retries=None, backoff_factor=None,
-                   retry_statuses=None, retry_methods=None, environment=None,
+                   retry_statuses=None, retry_methods=None,
+                   logging_configuration=None, environment=None,
                    x_rapid_api_key=None,
                    custom_header_authentication_credentials=None):
         http_client_instance = http_client_instance or self.http_client_instance
@@ -79,6 +81,7 @@ class Configuration(HttpClientConfiguration):
         backoff_factor = backoff_factor or self.backoff_factor
         retry_statuses = retry_statuses or self.retry_statuses
         retry_methods = retry_methods or self.retry_methods
+        logging_configuration = logging_configuration or self.logging_configuration
         environment = environment or self.environment
         custom_header_authentication_credentials = self.create_auth_credentials_object(
             x_rapid_api_key,
@@ -89,7 +92,8 @@ class Configuration(HttpClientConfiguration):
             override_http_client_configuration=override_http_client_configuration,
             http_call_back=http_call_back, timeout=timeout, max_retries=max_retries,
             backoff_factor=backoff_factor, retry_statuses=retry_statuses,
-            retry_methods=retry_methods, environment=environment,
+            retry_methods=retry_methods, logging_configuration=logging_configuration,
+            environment=environment,
             custom_header_authentication_credentials=custom_header_authentication_credentials
         )
 

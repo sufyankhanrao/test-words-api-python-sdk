@@ -25,7 +25,8 @@ class WordsapiClient(object):
                  override_http_client_configuration=False, http_call_back=None,
                  timeout=60, max_retries=0, backoff_factor=2,
                  retry_statuses=None, retry_methods=None,
-                 environment=Environment.PRODUCTION, x_rapid_api_key=None,
+                 logging_configuration=None, environment=Environment.PRODUCTION,
+                 x_rapid_api_key=None,
                  custom_header_authentication_credentials=None, config=None):
         self.config = config or Configuration(
             http_client_instance=http_client_instance,
@@ -33,6 +34,7 @@ class WordsapiClient(object):
             http_call_back=http_call_back, timeout=timeout,
             max_retries=max_retries, backoff_factor=backoff_factor,
             retry_statuses=retry_statuses, retry_methods=retry_methods,
+            logging_configuration=logging_configuration,
             environment=environment, x_rapid_api_key=x_rapid_api_key,
             custom_header_authentication_credentials=custom_header_authentication_credentials)
 
